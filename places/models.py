@@ -8,3 +8,11 @@ class Place(models.Model):
     description_long = models.TextField(verbose_name='Длинное описание')
     lng = models.FloatField(verbose_name='Долгота')
     lat = models.FloatField(verbose_name='Широта')
+
+    def __str__(self) -> str:
+        return self.title
+
+
+class Image(models.Model):
+    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    file = models.ImageField(verbose_name='Картинка', upload_to='media')
