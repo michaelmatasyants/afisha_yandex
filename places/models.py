@@ -3,7 +3,7 @@ from django.db import models
 
 class Place(models.Model):
     '''Places'''
-    id = models.CharField(max_length=250, primary_key=True)
+    place_id = models.CharField(max_length=250, unique=True)
     title = models.CharField(verbose_name='Название',
                              max_length=250)
     point_title = models.CharField(verbose_name='Назваение точки на карте',
