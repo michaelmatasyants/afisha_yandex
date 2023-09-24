@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
+from django.urls import reverse
 from places.models import Place
 
 
@@ -12,18 +13,19 @@ def show_main_page(request):
             "geometry": {
                 "type": "Point",
                 "coordinates": [place.lng, place.lat]
-                },
+            },
             "properties": {
                 "title": place.point_title,
                 "placeId": place.place_id,
-                "detailsUrl": f"static/places/{place.place_id}.json"
-                }
+                "detailsUrl": reverse(show_place_json, args=[place.id])
+            }
         } for place in places]
-
-    context = {'places_geojson': {
-                    "type": "FeatureCollection",
-                    "features": features
-                    }
+    print('print output', reverse(show_place_json, args=[places[1].id]))
+    context = {
+        'places_geojson': {
+            "type": "FeatureCollection",
+            "features": features
+        }
     }
     return render(request, 'index.html', context=context)
 
@@ -33,7 +35,7 @@ def show_place_json(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
     response = {
         "title": place.title,
-        "imgs": [photo.file.path for photo in place.images.all()],
+        "imgs": [photo.file.url for photo in place.images.all()],
         "description_short": place.description_short,
         "description_long": place.description_long,
         "coordinates": {
