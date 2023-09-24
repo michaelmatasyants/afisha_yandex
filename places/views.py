@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse, JsonResponse
 from places.models import Place
 
 
@@ -14,8 +15,8 @@ def show_main_page(request):
                 },
             "properties": {
                 "title": place.point_title,
-                "placeId": place.id,
-                "detailsUrl": f"static/places/{place.id}.json"
+                "placeId": place.place_id,
+                "detailsUrl": f"static/places/{place.place_id}.json"
                 }
         } for place in places]
 
@@ -25,3 +26,20 @@ def show_main_page(request):
                     }
     }
     return render(request, 'index.html', context=context)
+
+
+def show_place_json(request, place_id):
+    '''Place json view'''
+    place = get_object_or_404(Place, pk=place_id)
+    response = {
+        "title": place.title,
+        "imgs": [photo.file.path for photo in place.images.all()],
+        "description_short": place.description_short,
+        "description_long": place.description_long,
+        "coordinates": {
+            "lat": place.lat,
+            "lng": place.lng
+        }
+    }
+    return JsonResponse(response,
+                        json_dumps_params={'ensure_ascii': False, 'indent': 4})
