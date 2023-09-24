@@ -28,3 +28,5 @@ class Image(models.Model):
                               related_name='images')
     file = models.ImageField(verbose_name='Картинка',
                              upload_to='')
+    file_position = models.IntegerField(verbose_name='Позиция',
+                                        null=True)
