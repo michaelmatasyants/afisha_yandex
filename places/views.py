@@ -20,7 +20,6 @@ def show_main_page(request):
                 "detailsUrl": reverse(show_place_json, args=[place.id])
             }
         } for place in places]
-    print('print output', reverse(show_place_json, args=[places[1].id]))
     context = {
         'places_geojson': {
             "type": "FeatureCollection",
@@ -31,11 +30,12 @@ def show_main_page(request):
 
 
 def show_place_json(request, place_id):
-    '''Place json view'''
+    '''Get place values json'''
     place = get_object_or_404(Place, pk=place_id)
     response = {
         "title": place.title,
-        "imgs": [photo.file.url for photo in place.images.order_by('file_position')],
+        "imgs": [photo.file.url for photo in
+                 place.images.order_by('file_position')],
         "description_short": place.description_short,
         "description_long": place.description_long,
         "coordinates": {
@@ -44,4 +44,5 @@ def show_place_json(request, place_id):
         }
     }
     return JsonResponse(response,
-                        json_dumps_params={'ensure_ascii': False, 'indent': 4})
+                        json_dumps_params={'ensure_ascii': False,
+                                           'indent': 4})
