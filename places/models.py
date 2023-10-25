@@ -1,7 +1,6 @@
 from django.db import models
 from tinymce.models import HTMLField
 
-
 class Place(models.Model):
     '''Places'''
     place_id = models.CharField(max_length=250, unique=True)
