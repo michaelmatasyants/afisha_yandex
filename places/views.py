@@ -15,11 +15,12 @@ def show_main_page(request):
                 "coordinates": [place.lng, place.lat]
             },
             "properties": {
-                "title": place.point_title,
-                "placeId": place.place_id,
+                "title": place.title,
+                "placeId": place.title,
                 "detailsUrl": reverse(show_place_json, args=[place.id])
             }
         } for place in places]
+
     context = {
         'places_geojson': {
             "type": "FeatureCollection",

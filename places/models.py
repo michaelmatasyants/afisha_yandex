@@ -3,12 +3,9 @@ from tinymce.models import HTMLField
 
 class Place(models.Model):
     '''Places'''
-    place_id = models.CharField(max_length=250, unique=True)
     title = models.CharField(verbose_name='Название',
-                             max_length=250)
-    point_title = models.CharField(verbose_name='Назваение точки на карте',
-                                   max_length=250,
-                                   blank=True)
+                             max_length=250,
+                             unique=True)
     description_short = models.TextField(verbose_name='Короткое описание',
                                          blank=True)
     description_long = HTMLField(verbose_name='Длинное описание',
@@ -30,7 +27,8 @@ class Image(models.Model):
                               on_delete=models.CASCADE,
                               related_name='images')
     file = models.ImageField(verbose_name='Картинка',
-                             upload_to='')
+                             upload_to='',
+                             unique=True)
     file_position = models.IntegerField(verbose_name='Позиция',
                                         null=False,
                                         blank=False,
@@ -40,3 +38,4 @@ class Image(models.Model):
         ordering = ['file_position']
         verbose_name = 'Картинка'
         verbose_name_plural = 'Картинки'
+        unique_together = ('file', 'place')
