@@ -11,6 +11,8 @@ Icon
 
 # Thumbnails
 ._*
+*Thumbs.db
+*.DS_Store
 
 # Files that might appear on external disk
 .Spotlight-V100
@@ -26,8 +28,8 @@ Temporary Items
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
+**__pycache__/
+**.*.py[cod]
 
 # C extensions
 *.so
@@ -81,12 +83,19 @@ target/
 ### Django ###
 *.log
 *.pot
-*.pyc
-__pycache__/
+**.*.pyc
+**.*.pyd
+**.*.pyo
 local_settings.py
 
 .env
 db.sqlite3
 media/
 venv/
-
+**.vscode
+**.idea
+/static/admin/*
+/static/django_extensions/*
+/static/adminsortable2/*
+/static/django_tinymce/*
+/static/tinymce/*
