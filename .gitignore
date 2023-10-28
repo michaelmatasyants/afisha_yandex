@@ -99,3 +99,4 @@ venv/
 /static/adminsortable2/*
 /static/django_tinymce/*
 /static/tinymce/*
+/static/staticfiles.json
