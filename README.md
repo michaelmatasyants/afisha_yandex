@@ -19,7 +19,18 @@ A website about the most interesting places in Moscow.
 
 ## How to run
 
-Python3 should already be installed.
+Python3 should already be installed. Ideally version `3.11`.<br>
+
+Check the python version:
+```
+python3 --version
+```
+
+To upgrade python to verion `3.11`:
+```
+sudo apt-get update && sudo apt-get upgrade
+sudo apt-get install python3.11
+```
 
 Then use `pip` (or `pip3` if there is a conflict with Python2) to install the dependencies:
 ```
