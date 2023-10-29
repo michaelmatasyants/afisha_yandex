@@ -91,9 +91,4 @@ media/
 venv/
 **.vscode
 **.idea
-/static/admin/*
-/static/django_extensions/*
-/static/adminsortable2/*
-/static/django_tinymce/*
-/static/tinymce/*
-/static/staticfiles.json
+/static/*

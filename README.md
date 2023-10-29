@@ -4,7 +4,7 @@
 - [Administrator panel](https://mikayel.pythonanywhere.com/admin)
 - [Project on GitHub](https://github.com/michaelmatasyants/afisha_yandex)
 
- # Where to go - Moscow through Artyom's eyes
+# Where to go - Moscow through Artyom's eyes
 
 A website about the most interesting places in Moscow.
 
@@ -55,13 +55,17 @@ pip install -r requirements.txt
     DEBUG=<Set to True to see debugging information when developing the site. False is the default value>
     ```
 
+* Put all static files (js, css, images, etc.) in assets and after to collect all static files in static type:
+    ```
+    python3 manage.py collectstatic
+    ```
+
 * Do a database migration
     ```
     python3 manage.py migrate
     ```
 
 * Run the server using `manage.py`
-
     ```
     python3 manage.py runserver
     ```
