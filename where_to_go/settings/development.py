@@ -7,23 +7,13 @@ from environs import Env
 env = Env()
 env.read_env()
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = env.str('SECRET_KEY')
 
-DEBUG = env.bool('DEBUG', default=False)
+DEBUG = True
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['127.0.0.1'])
-
-if not DEBUG:
-    CSRF_COOKIE_SECURE = True
-    SESSION_COOKIE_SECURE = True
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_SSL_REDIRECT = True
-    SECURE_HSTS_PRELOAD = True
-    ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
-
+ALLOWED_HOSTS = ['127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -37,6 +27,7 @@ INSTALLED_APPS = [
     'adminsortable2',
     'tinymce',
     'whitenoise.runserver_nostatic',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +39,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'where_to_go.urls'
@@ -104,10 +96,9 @@ USE_I18N = True
 
 USE_TZ = True
 
-if DEBUG:
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+STATIC_ROOT = ''
 
 STATIC_URL = '/static/'
 
