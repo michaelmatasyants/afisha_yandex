@@ -33,7 +33,8 @@ class Image(models.Model):
                              upload_to='',
                              unique=True)
     file_position = models.IntegerField(verbose_name='Позиция',
-                                        default=0)
+                                        default=0,
+                                        db_index=True)
 
     class Meta:
         ordering = ['file_position']
