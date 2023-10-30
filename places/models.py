@@ -26,6 +26,7 @@ class Place(models.Model):
 class Image(models.Model):
     '''Place images'''
     place = models.ForeignKey(Place,
+                              verbose_name='Место',
                               on_delete=models.CASCADE,
                               related_name='images')
     file = models.ImageField(verbose_name='Картинка',
