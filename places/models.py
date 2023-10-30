@@ -33,8 +33,6 @@ class Image(models.Model):
                              upload_to='',
                              unique=True)
     file_position = models.IntegerField(verbose_name='Позиция',
-                                        null=False,
-                                        blank=False,
                                         default=0)
 
     class Meta:
