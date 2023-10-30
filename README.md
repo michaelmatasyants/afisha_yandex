@@ -8,7 +8,7 @@
 
 A website about the most interesting places in Moscow.
 
-![Screenshot of the main page](screenshot.png)
+![Screenshot of the main page](/assets/screenshot.png)
 
 
 ## How to add a new location

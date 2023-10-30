@@ -37,8 +37,8 @@ def show_place_json(request, place_id):
         "title": place.title,
         "imgs": [photo.file.url for photo in
                  place.images.order_by('file_position')],
-        "description_short": place.description_short,
-        "description_long": place.description_long,
+        "short_description": place.short_description,
+        "long_description": place.long_description,
         "coordinates": {
             "lat": place.lat,
             "lng": place.lng
