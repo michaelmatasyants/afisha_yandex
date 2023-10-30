@@ -15,12 +15,12 @@ class Place(models.Model):
     lng = models.FloatField(verbose_name='Долгота')
     lat = models.FloatField(verbose_name='Широта')
 
-    def __str__(self) -> str:
-        return f'{self.title}'
-
     class Meta:
         verbose_name = 'Место'
         verbose_name_plural = 'Места'
+
+    def __str__(self) -> str:
+        return f'{self.title}'
 
 
 class Image(models.Model):
