@@ -92,3 +92,4 @@ venv/
 **.vscode
 **.idea
 /static/*
+/places/migrations/*
