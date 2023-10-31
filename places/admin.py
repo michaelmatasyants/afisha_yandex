@@ -20,6 +20,7 @@ class ImageInline(SortableStackedInline):
 class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
     '''Admin panel for Place model'''
     list_display = ['title', 'lng', 'lat']
+    search_fields = ['title']
     inlines = [
         ImageInline,
     ]
@@ -28,4 +29,5 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
     '''Admin panel for Image model'''
-    list_display = ['place', 'file_position']
+    list_display = ['place', 'file_position', ]
+    autocomplete_fields = ['place', ]
