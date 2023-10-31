@@ -4,7 +4,7 @@ from urllib.parse import urlparse
 from django.core.management.base import BaseCommand, CommandParser
 import requests
 from places.models import Place, Image
-from where_to_go.settings import MEDIA_ROOT
+from where_to_go.settings.production import MEDIA_ROOT
 
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
@@ -24,12 +24,16 @@ class Command(BaseCommand):
             place_response.raise_for_status()
             new_place = place_response.json()
 
-            added_place, place_created = Place.objects.get_or_create(
+            defaults = dict(
                 title=new_place['title'],
-                description_short=new_place['description_short'],
-                description_long=new_place['description_long'],
+                short_description=new_place['description_short'],
+                long_description=new_place['description_long'],
                 lng=new_place['coordinates']['lng'],
                 lat=new_place['coordinates']['lat']
+            )
+            added_place, place_created = Place.objects.update_or_create(
+                title=new_place['title'],
+                defaults=defaults
             )
 
             images = new_place['imgs']
@@ -44,6 +48,7 @@ class Command(BaseCommand):
                     file=image_name
                 )
             if not place_created:
-                logging.info(msg=f'Place "{added_place}" was already added earlier')
+                logging.info(
+                    msg=f'Place "{added_place}" was already added earlier')
                 continue
             logging.info(msg=f'New place "{added_place}" added')
