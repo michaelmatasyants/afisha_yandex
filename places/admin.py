@@ -10,10 +10,10 @@ class ImageInline(SortableStackedInline):
     model = Image
     readonly_fields = ['preview']
 
-    def preview(self, obj):
+    def preview(self, image_obj):
         '''display preview of image'''
         return format_html('<img src="{}" width="200" height="200" />',
-                           obj.file.url)
+                           image_obj.file.url)
 
 
 @admin.register(Place)
