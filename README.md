@@ -62,6 +62,7 @@ pip install -r requirements.txt
 
 * Do a database migration
     ```
+    python3 manage.py makemigrations places
     python3 manage.py migrate
     ```
 
