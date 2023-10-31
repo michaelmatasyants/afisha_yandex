@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Prefetch
 from django.http import JsonResponse
 from django.urls import reverse
 from places.models import Place
@@ -32,7 +33,8 @@ def show_main_page(request):
 
 def show_place_json(request, place_id):
     '''Get place values json'''
-    place = get_object_or_404(Place, pk=place_id)
+    place = get_object_or_404(Place.objects.prefetch_related('images'),
+                              pk=place_id)
     response = {
         "title": place.title,
         "imgs": [photo.file.url for photo in
