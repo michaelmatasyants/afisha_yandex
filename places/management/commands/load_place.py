@@ -1,9 +1,7 @@
 import logging
-#import os
 from urllib.parse import urlparse
 from django.core.management.base import BaseCommand, CommandParser
 from django.core.files.base import ContentFile
-from django.core.files.temp import NamedTemporaryFile
 
 import requests
 
@@ -15,7 +13,8 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
 
 
 class Command(BaseCommand):
-    help='Helps to add new places from json files'
+    '''Custom admin comand to add new places from json files'''
+    help = 'Helps to add new places from json files'
 
     def add_arguments(self, parser: CommandParser) -> None:
         parser.add_argument('json_places', nargs='*')
