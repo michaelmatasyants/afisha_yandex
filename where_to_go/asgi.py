@@ -1,8 +1,8 @@
 import os
 
 from django.core.asgi import get_asgi_application
-from manage import DEBUG
 
+from manage import DEBUG
 
 if DEBUG:
     os.environ.setdefault('DJANGO_SETTINGS_MODULE',
