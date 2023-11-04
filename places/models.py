@@ -34,7 +34,8 @@ class Image(models.Model):
                              unique=True)
     file_position = models.IntegerField(verbose_name='Позиция',
                                         default=0,
-                                        db_index=True)
+                                        db_index=True,
+                                        blank=True)
 
     class Meta:
         ordering = ['file_position']
