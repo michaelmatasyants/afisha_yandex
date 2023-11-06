@@ -1,12 +1,11 @@
 import logging
 from urllib.parse import urlparse
-from django.core.management.base import BaseCommand, CommandParser
-from django.core.files.base import ContentFile
 
 import requests
+from django.core.files.base import ContentFile, File
+from django.core.management.base import BaseCommand, CommandParser
 
-from places.models import Place, Image
-
+from places.models import Image, Place
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -43,12 +42,10 @@ class Command(BaseCommand):
                 image_response = requests.get(url=image_url, timeout=120)
                 image_response.raise_for_status()
                 image_name = urlparse(image_url).path.split('/')[-1]
-
-                image, _ = Image.objects.update_or_create(place=added_place,
-                                                          file=image_name)
-                image.file.save(image_name,
-                                ContentFile(image_response.content),
-                                save=True)
+                Image.objects.update_or_create(
+                    place=added_place,
+                    file=File(file=ContentFile(image_response.content),
+                              name=image_name))
             if not place_created:
                 logging.info(
                     msg=f'Place "{added_place}" was already added earlier')
