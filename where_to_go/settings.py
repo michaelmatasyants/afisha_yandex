@@ -6,11 +6,20 @@ from environs import Env
 env = Env()
 env.read_env()
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = env.str('SECRET_KEY')
 
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=False)
+
+if not DEBUG:
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_PRELOAD = True
+    ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
